@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Admin Paneli</title>
+
+    <!-- Bootstrap core CSS-->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Page level plugin CSS-->
+    <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin.css" rel="stylesheet">
+
+  </head>
+
+  <body id="page-top">
+
+    <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+
+      <a class="navbar-brand mr-1" href="adminpanel.html">Admin Paneli</a>
+
+      <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Navbar Search -->
+      <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+        <div class="input-group">
+
+        </div>
+      </form>
+
+      <!-- Navbar -->
+      <ul class="navbar-nav ml-auto ml-md-0">
+        <li class="nav-item dropdown no-arrow">
+          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-user-circle fa-fw"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+            <a class="dropdown-item" href="adminpanel.html">Hesabım</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="../index.php" id="logout">Çıkış Yap</a>
+          </div>
+        </li>
+      </ul>
+
+    </nav>
+
+    <div id="wrapper">
+
+      <!-- Sidebar -->
+      <ul class="sidebar navbar-nav">
+        <li class="nav-item">
+              <a class="nav-link" href="adminpanel.html">
+                <i class="fas fa-user-circle"></i>
+                <span>Kişisel Bilgilerim</span></a>
+        </li>
+        <li class="nav-item">
+              <a class="nav-link" href="adminpanel_brand.html">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Marka Ekle</span></a>
+        </li>
+        <li class="nav-item">
+              <a class="nav-link" href="adminpanel_category.html">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Kategori Ekle</span></a>
+        </li>
+        <li class="nav-item">
+              <a class="nav-link" href="adminpanel_product.html">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Ürün Ekle</span></a>
+        </li>
+        <li class="nav-item">
+              <a class="nav-link" href="adminpanel_marketsettings.html">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Market Ayarları</span></a>
+        </li>
+        <li class="nav-item active">
+              <a class="nav-link" href="adminpanel_neighborhood.html">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Bölge Ayarları</span></a>
+        </li>
+        <li class="nav-item">
+              <a class="nav-link" href="adminpanel_user.html">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Kullanıcı Ayarları</span></a>
+        </li>
+      </ul>
+
+      <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+          <!-- Breadcrumbs-->
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="orders.html">Admin</a>
+            </li>
+            <li class="breadcrumb-item active">Tablolar</li>
+          </ol>
+
+          <!-- DataTables Example -->
+          <div class="card mb-3">
+            <div class="card-header">
+              <i class="fas fa-table"></i> Bölge Ayarları
+            </div>
+            <div class="card-body">
+              <div id="accordion">
+                <div class="card">
+                  <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                      <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Mahalle Ekle
+                      </button>
+                    </h5>
+                  </div>
+                  <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="card-body">
+                      <form id="neighborhood_submit">
+                        <div class="form-group row">
+                          <div class="col">
+                            <select name="city" class="form-control" id="address_city"></select>
+                          </div>
+                          <div class="col">
+                            <select name="district" class="form-control" id="address_district"></select>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-2 col-form-label">Mahalle İsmi</label>
+                          <div class="col-sm-7">
+                            <input type="text" class="form-control" name="neighborhood" placeholder="Mahalle İsmi" id="neighborhood_name">
+                          </div>
+                          <div class="col-sm-3">
+                            <button type="submit" name="submit" class="btn btn-primary">Gönder</button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <p class="small text-center text-muted my-5">
+          </p>
+
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+        <footer class="sticky-footer">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Hesaplı Marketim © 2019</span>
+            </div>
+          </div>
+        </footer>
+
+      </div>
+      <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Page level plugin JavaScript-->
+    <script src="vendor/datatables/jquery.dataTables.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin.min.js"></script>
+
+    <!-- Demo scripts for this page-->
+    <script src="js/demo/datatables-demo.js"></script>
+    <script src="../js/main.js"></script>
+
+  </body>
+
+  <script>
+
+  $(document).ready(function(){
+
+    function parseJwt_userId (token) {
+          var base64Url = token.split('.')[1];
+          var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+          var deneme=JSON.parse(window.atob(base64));
+          return deneme.userId;
+    };
+    function parseJwt_userType (token) {
+          var base64Url = token.split('.')[1];
+          var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+          var deneme=JSON.parse(window.atob(base64));
+          return deneme.userType;
+      };
+
+    var token = $.parseJSON(localStorage.getItem('Token'));
+      if (token == null  || parseJwt_userType(token)!="5c1d176670920532900b6a5f") {
+          location.href="../404.php";
+          return;
+      }else{
+        let dropdown_city = $('#address_city');
+        dropdown_city.empty();
+        dropdown_city.append('<option selected="true" disabled>Şehir Seçiniz</option>');
+        dropdown_city.prop('selectedIndex', 0);
+        $.getJSON("http://localhost:3000/cities", function (data) {
+          $.each(data.city, function (key, entry) {
+              dropdown_city.append($('<option></option>').val(entry._id).text(entry.name).attr('data-id', entry.code));
+          });
+        });
+
+        $("#address_city").on('change', function() {
+          var city_code = $('#address_city').find(":selected").attr("data-id");
+          let dropdown_district = $('#address_district');
+          dropdown_district.empty();
+          dropdown_district.append('<option selected="true" disabled>İlçe Seçiniz</option>');
+          dropdown_district.prop('selectedIndex', 0);
+          $.getJSON("http://localhost:3000/districts", function (data) {
+            $.each(data.District, function (key, entry) {
+               if(entry.code==city_code)
+                dropdown_district.append($('<option></option>').attr('value', entry._id).text(entry.name));
+            });
+          });
+        });
+
+        $("#address_district").on('change', function() {
+          var district_code = $(this).val();
+
+          $("#neighborhood_submit").on('submit', function (event){
+              $.ajax({
+              url: "http://localhost:3000/neighborhoods",
+              type: "POST",
+              async:false,
+              data: {
+                  district: district_code,
+                  name: $("#neighborhood_name").val()
+              },
+              dataType: "JSON",
+              success: function (jsonStr) {
+                // $("#result").text(JSON.stringify(jsonStr));
+                  alert("Mahalle Oluşturuldu");
+              },
+              error: function (xhr, status, error) {
+                  alert("Mahalle Oluşturulamadı");
+              }
+              });
+            });
+
+        });
+
+
+
+
+
+
+      }
+
+
+
+
+  });
+
+
+
+  </script>
+
+</html>

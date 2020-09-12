@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Market Paneli</title>
+
+    <!-- Bootstrap core CSS-->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Page level plugin CSS-->
+    <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin.css" rel="stylesheet">
+
+  </head>
+
+  <body id="page-top">
+
+    <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+
+      <a class="navbar-brand mr-1" href="myaccount.html" id="market_logo"></a>
+
+      <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Navbar Search -->
+      <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+        <div class="input-group">
+
+        </div>
+      </form>
+
+      <!-- Navbar -->
+      <ul class="navbar-nav ml-auto ml-md-0">
+        <li class="nav-item dropdown no-arrow">
+          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-user-circle fa-fw"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+            <a class="dropdown-item" href="myaccount.html">Hesabım</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="../index.php" id="logout">Çıkış Yap</a>
+          </div>
+        </li>
+      </ul>
+
+    </nav>
+
+    <div id="wrapper">
+
+      <!-- Sidebar -->
+      <ul class="sidebar navbar-nav">
+        <li class="nav-item">
+              <a class="nav-link" href="myaccount.html">
+                <i class="fas fa-user-circle"></i>
+                <span>Kişisel Bilgilerim</span></a>
+        </li>
+        <li class="nav-item">
+              <a class="nav-link" href="addproduct.html">
+                <i class="fas fa-store"></i>
+                <span>Stok Bilgisi</span></a>
+        </li>
+        <li class="nav-item active">
+              <a class="nav-link" href="orders.html">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Siparişler</span></a>
+        </li>
+        <li class="nav-item">
+              <a class="nav-link" href="serviceAddress.html">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Servis Adresleri</span></a>
+        </li>
+      </ul>
+
+      <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+          <!-- Breadcrumbs-->
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="orders.html">Siparişler</a>
+            </li>
+            <li class="breadcrumb-item active">Tablolar</li>
+          </ol>
+
+          <!-- DataTables Example -->
+          <div class="card mb-3">
+            <div class="card-header">
+              <i class="fas fa-table"></i> Siparişler
+            </div>
+            <div class="card-body">
+              <table class="table table-bordered table-hover">
+                <thead class="table-dark">
+                <tr>
+                  <th>Sipariş Tarihi</th>
+                  <th>Müşteri</th>
+                  <th>Toplam Tutar</th>
+                  <th>Ödeme Şekli</th>
+                  <th>Market</th>
+                  <th>Sipariş Durumu</th>
+                </tr>
+              </thead>
+              <tbody  id="order_data">
+
+              </tbody>
+              </table>
+              <nav>
+                <ul class="pagination">
+
+                </ul>
+              </nav>
+            </div>
+          </div>
+
+          <p class="small text-center text-muted my-5">
+
+          </p>
+
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+        <footer class="sticky-footer">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Hesaplı Marketim © 2018</span>
+            </div>
+          </div>
+        </footer>
+
+      </div>
+      <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+    <div class="modal" tabindex="-1" role="dialog" id="modal_orderdetail">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="siparis">Sipariş Detayı</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p id="modalbody_orderdetail">
+              <div id="orderprint">
+              <table border='1' class="table table-bordered mb-2" id="orderdetails_data">
+
+              </table>
+              <br hidden><br hidden>
+                <p hidden id="total_amount_pdf" style="font-size:15px"></p><br hidden>
+              <p hidden style="font-size:17px;text-align:center;">Yukarıda belirtilen ürünleri aldım.</p><br hidden>
+              <p hidden style="font-size:22px;font-weight:bold;text-align:center;">İmza</p><br hidden><br hidden>
+            </div>
+
+            <p hidden id="market_name_pdf"></p>
+            <p hidden id="customer_address_pdf"></p>
+            <p hidden id="customer_name_pdf"></p>
+            <p hidden id="customer_phone_pdf"></p>
+            <p hidden id="payment_type_pdf"></p>
+            </p>
+          </div>
+          <div class="modal-footer">
+            <div class="form-group col-md-4">
+              <label for="inputState">Durum</label>
+            <form>
+              <select id="orderstatus_option" class="form-control">
+                  <option selected="true" disabled>Seçiniz...</option>
+                  <option value="1">Siparişiniz Hazırlandı</option>
+                  <option value="2">Alıcıya Ulaştırılmak Üzere Yola Çıktı</option>
+                  <option value="3">Teslim Edildi</option>
+                </select>
+              </div>
+              <button type="button" class="btn btn-primary" id="orderprint_button">Çıktı Al</button>
+              <button type="button" class="btn btn-primary" id="orderstatus_button">Kaydet</button>
+              <button type="submit" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Page level plugin JavaScript-->
+    <script src="vendor/datatables/jquery.dataTables.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin.min.js"></script>
+
+    <!-- Demo scripts for this page-->
+    <script src="js/demo/datatables-demo.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/pdfmake.min.js"></script>
+    <script src="../js/vfs_fonts.js"></script>
+
+  </body>
+
+  <script>
+
+  $(document).ready(function(){
+
+    function parseJwt_userId (token) {
+          var base64Url = token.split('.')[1];
+          var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+          var deneme=JSON.parse(window.atob(base64));
+          return deneme.userId;
+    };
+
+    var token = $.parseJSON(localStorage.getItem('Token'));
+      if (token == null) {
+          alert("Token Alınamadı");
+          return;
+      }else{
+        var market_userId = parseJwt_userId(token);
+        $.getJSON("http://localhost:3000/shops?user="+market_userId, function (data) {
+            var marketinfo_data='';
+          $.each(data.shop, function (key, entry) {
+            marketinfo_data +='<img src="http://localhost:3000/'+entry.logo+'" width="50" height="50"> Market Paneli';
+          });
+          $('#market_logo').append(marketinfo_data);
+        });
+        $.getJSON("http://localhost:3000/shopUnits?user="+market_userId, function (data) {
+          function products_table(page_number=1){
+              $.getJSON("http://localhost:3000/orders?shopUnit="+data.shopUnit[0]._id+"&sort=-1&page="+page_number+"&limit=10",function(data){
+                 var order_data='', pagenumber_data='' ;
+
+                 var count = `${data.sumcount}`;
+                 var perpage=10;
+                 var total_pagenumber= Math.ceil(count/perpage);
+                 if(page_number>1){
+                       var before=parseInt(page_number)-1;
+                       pagenumber_data +='<li class="page-item"><a class="page-link" href="#'+before+'">Önceki</a></li>';
+                 }
+                 for(var i=1;i<=total_pagenumber;i++){
+                     if(i==page_number){
+                         pagenumber_data +='<li class="page-item active"><a class="page-link" href="#'+i+'">'+i+'</a></li>';
+                     }else{
+                         pagenumber_data +='<li class="page-item"><a class="page-link" href="#'+i+'">'+i+'</a></li>';
+                     }
+                 }
+                 if(page_number!=total_pagenumber){
+                       var next = parseInt(page_number) + 1;
+                       pagenumber_data +='<li class="page-item"><a class="page-link" href="#'+next+'">Sonraki</a></li>';
+                 }
+                   $('.pagination').html(pagenumber_data);
+
+                 $('.page-item a').click(function(){
+                   var num_href=$(this).attr('href');
+                   var num=num_href.split('#');
+                   products_table(num[1]);
+                 });
+                 $.each(data.orders, function(k,v){
+
+                     var orderstatus='';
+                     var orderstatus_id=v.order_status;
+                     var payment_type;
+                       var fields = v.created_at.split('T');
+                       if(v.payment_type==0){
+                         payment_type="Kredi Kartı";
+                       }else if(v.payment_type==1){
+                         payment_type="Nakit";
+                       }
+
+                   if(orderstatus_id==0){
+                       orderstatus="Onay Bekliyor";
+                   } else if(orderstatus_id==1){
+                       orderstatus="Siparişiniz Hazırlandı";
+                   } else if(orderstatus_id==2){
+                         orderstatus="Alıcıya Ulaştırılmak Üzere Yola Çıktı";
+                   } else if(orderstatus_id==3){
+                       orderstatus="Teslim Edildi";
+                   } else if(orderstatus_id==4){
+                       orderstatus="İptal Edildi";
+                   }
+                       $.getJSON("http://localhost:3000/shopUnits/"+v.shopUnit,function(data){
+                           var shopUnit_name = `${data.shopUnit.name}`
+                           $( "."+v.shopUnit ).removeClass().addClass( v.shopUnit );
+                           $("."+v.shopUnit).text(shopUnit_name);
+                       });
+                       $.getJSON("http://localhost:3000/user/"+v.user,function(data){
+                           var user_name = data.email;
+                           $( "."+v.user ).removeClass().addClass(v.user);
+                           $("."+v.user).text(user_name);
+                       });
+
+
+                     order_data +='<tr>';
+                     order_data += '<td>'+fields[0]+'</td>';
+                     order_data += '<td class="'+v.user+'"></td>';
+                     order_data += '<td>'+v.total_amount+'</td>';
+                     order_data += '<td>'+payment_type+'</td>';
+                     order_data += '<td class="'+v.shopUnit+'"></td>';
+                     order_data += '<td>'+orderstatus+'</td>';
+                     order_data += '<td><a data-toggle="modal" href="#modal_orderdetail" class="orderdetail"  id="'+v._id+'">Sipariş Detayı</a></td></tr>';
+
+                 });
+
+                 $('#order_data').html(order_data);
+
+
+                 $(".orderdetail").click(function(){
+                 var orderId=$(this).closest("tr").find(".orderdetail").attr("id");
+                 $.getJSON("http://localhost:3000/orders/"+orderId,function(data){
+                     $('#total_amount_pdf').html("Toplam Ücret: "+data.order.total_amount+" TL");
+
+                     if(data.order.payment_type==0){
+                       $('#payment_type_pdf').html("Kredi Kartı");
+                     }else if(data.order.payment_type==1){
+                       $('#payment_type_pdf').html("Nakit");
+                     }
+
+                     $.getJSON("http://localhost:3000/shopUnits/"+data.order.shopUnit,function(d){
+                       $('#market_name_pdf').html(d.shopUnit.name);
+                     });
+
+                     $.getJSON("http://localhost:3000/user/"+data.order.user,function(d){
+                       $('#customer_name_pdf').html(d.email);
+                       $('#customer_phone_pdf').html(d.phone);
+
+                     });
+                     $.getJSON("http://localhost:3000/addresses/"+data.order.address,function(data){
+                           $('#customer_address_pdf').html(data.address.description);
+                     });
+
+
+                 });
+
+                 $.getJSON("http://localhost:3000/orderdetails/?guid="+orderId,function(data){
+
+                   var shopUnit_name ='';
+                   var orderdetails_data='<tr><td><span style="font-weight:bold">Ürün</span></td><td><p style="font-weight:bold">Adet</p></td><td><p style="font-weight:bold">Birim Fiyat</p></td><td><p style="font-weight:bold">Ara Toplam</p></td></tr>';
+                     $.each(data.orderDetails, function(k,v){
+                         function getproductname(product_id){
+                           var mydata = [];
+                             $.ajax({
+                             url: "http://localhost:3000/products/"+product_id,
+                             async: false,
+                             dataType: 'json',
+                             success: function (json) {
+                               mydata = json.product.name;
+                             }
+                             });
+                             return mydata;
+                         }
+
+                         function getproductimage(product_id){
+                           var mydata = [];
+                             $.ajax({
+                             url: "http://localhost:3000/products/"+product_id,
+                             async: false,
+                             dataType: 'json',
+                             success: function (json) {
+                               mydata = json.product.productImage;
+                             }
+                             });
+                             return mydata;
+                         }
+
+
+                     orderdetails_data +='<tr>';
+                     orderdetails_data +='<td><img src="http://localhost:3000/'+getproductimage(v.product)+'" class="img-responsive" height="50" width="50"/> '+ getproductname(v.product)+'</td>';
+                     orderdetails_data +='<td>'+v.quantity+'</td>';
+                     orderdetails_data +='<td>'+v.amount+'</td>';
+                     orderdetails_data +='<td>'+v.quantity*v.amount+'</td>';
+                     orderdetails_data +='</tr>';
+
+                   });
+
+                     $("#orderdetails_data tr").remove();
+                     $('#orderdetails_data').html(orderdetails_data);
+
+                 });
+
+
+                 $("#orderstatus_button").click(function(){
+                   if($(orderstatus_option).val()==1){
+
+                     var market_userId = parseJwt_userId(token);
+                     $.getJSON("http://localhost:3000/shopUnits?user="+market_userId, function (data) {
+                       $.each(data.shopUnit, function (key, entry) {
+                         $.getJSON("http://localhost:3000/orderdetails/?guid="+orderId,function(data){
+                             $.each(data.orderDetails, function(k,v){
+                               var shopunitstock_quantity=v.quantity;
+                               $.getJSON("http://localhost:3000/shopUnitstocks?shopUnit="+entry._id+"&product="+v.product,function(data){
+                                   $.each(data.shopUnitStocks, function(k,value){
+                                       var difference=value.stock-shopunitstock_quantity;
+                                       if(difference<0){
+                                         alert("Stokta Yeterli Ürün Yok");
+                                       } else {
+                                         var shopunitstockquantity = new XMLHttpRequest();
+                                         shopunitstockquantity.open('PATCH', "http://localhost:3000/shopUnitstocks/"+value._id, false);
+                                         shopunitstockquantity.setRequestHeader("Content-type","application/json");
+                                         shopunitstockquantity.send('[{"propName": "stock","value":"'+difference+'"}]');
+                                         //alert("Stoktan Düşürüldü"); // negatif sayıya düşüyor
+                                         //burada problemler var
+                                       }
+
+                                   });
+                                 });
+                               $.ajax({
+                                url: "http://localhost:3000/shopUnitStockMovements",
+                                type: "POST",
+                                data: {
+                                    product: v.product,
+                                    shopUnit: entry._id,
+                                    quantity: v.quantity,
+                                    movement_type: "0"
+                                },
+                                dataType: "JSON",
+                                success: function (jsonStr) {
+                                    $("#result").text(JSON.stringify(jsonStr));
+                                }
+                              });
+                             });
+                           });
+                       });
+                     });
+                   }
+
+
+                   var request = new XMLHttpRequest();
+                   request.open('PATCH', 'http://localhost:3000/orders/'+orderId, false);
+                   request.setRequestHeader("Content-type","application/json");
+                   request.send('[{"propName": "order_status","value":"'+$(orderstatus_option).val()+'"}]');
+                   //alert("Başarıyla Güncellendi");
+                 });
+               });
+
+               });
+           }
+           products_table();
+
+      /*      $.getJSON("http://localhost:3000/orders?shopUnit="+data.shopUnit[0]._id,function(data){
+              $.each(data.orders, function(k,v){
+
+                  var orderstatus='';
+                  var orderstatus_id=v.order_status;
+                  var payment_type;
+                    var fields = v.created_at.split('T');
+                    if(v.payment_type==0){
+                      payment_type="Kredi Kartı";
+                    }else if(v.payment_type==1){
+                      payment_type="Nakit";
+                    }
+
+                if(orderstatus_id==0){
+                    orderstatus="Onay Bekliyor";
+                } else if(orderstatus_id==1){
+                    orderstatus="Siparişiniz Hazırlandı";
+                } else if(orderstatus_id==2){
+                      orderstatus="Alıcıya Ulaştırılmak Üzere Yola Çıktı";
+                } else if(orderstatus_id==3){
+                    orderstatus="Teslim Edildi";
+                } else if(orderstatus_id==4){
+                    orderstatus="İptal Edildi";
+                }
+                    $.getJSON("http://localhost:3000/shopUnits/"+v.shopUnit,function(data){
+                        var shopUnit_name = `${data.shopUnit.name}`
+                        $( "."+v.shopUnit ).removeClass().addClass( v.shopUnit );
+                        $("."+v.shopUnit).text(shopUnit_name);
+                    });
+                    $.getJSON("http://localhost:3000/user/"+v.user,function(data){
+                        var user_name = data.email;
+                        $( "."+v.user ).removeClass().addClass(v.user);
+                        $("."+v.user).text(user_name);
+                    });
+
+
+                  order_data +='<tr>';
+                  order_data += '<td>'+fields[0]+'</td>';
+                  order_data += '<td class="'+v.user+'"></td>';
+                  order_data += '<td>'+v.total_amount+'</td>';
+                  order_data += '<td>'+payment_type+'</td>';
+                  order_data += '<td class="'+v.shopUnit+'"></td>';
+                  order_data += '<td>'+orderstatus+'</td>';
+                  order_data += '<td><a data-toggle="modal" href="#modal_orderdetail" class="orderdetail"  id="'+v._id+'">Sipariş Detayı</a></td></tr>';
+
+              });
+
+              $('#order_data').append(order_data);
+
+
+              $(".orderdetail").click(function(){
+              var orderId=$(this).closest("tr").find(".orderdetail").attr("id");
+              $.getJSON("http://localhost:3000/orders/"+orderId,function(data){
+                  $('#total_amount_pdf').html("Toplam Ücret: "+data.order.total_amount+" TL");
+
+                  if(data.order.payment_type==0){
+                    $('#payment_type_pdf').html("Kredi Kartı");
+                  }else if(data.order.payment_type==1){
+                    $('#payment_type_pdf').html("Nakit");
+                  }
+
+                  $.getJSON("http://localhost:3000/shopUnits/"+data.order.shopUnit,function(d){
+                    $('#market_name_pdf').html(d.shopUnit.name);
+                  });
+
+                  $.getJSON("http://localhost:3000/user/"+data.order.user,function(d){
+                    $('#customer_name_pdf').html(d.email);
+                    $('#customer_phone_pdf').html(d.phone);
+
+                  });
+                  $.getJSON("http://localhost:3000/addresses/"+data.order.address,function(data){
+                        $('#customer_address_pdf').html(data.address.description);
+                  });
+
+
+              });
+
+              $.getJSON("http://localhost:3000/orderdetails/?guid="+orderId,function(data){
+
+                var shopUnit_name ='';
+                var orderdetails_data='<tr><td><span style="font-weight:bold">Ürün</span></td><td><p style="font-weight:bold">Adet</p></td><td><p style="font-weight:bold">Birim Fiyat</p></td><td><p style="font-weight:bold">Ara Toplam</p></td></tr>';
+                  $.each(data.orderDetails, function(k,v){
+                      function getproductname(product_id){
+                        var mydata = [];
+                          $.ajax({
+                          url: "http://localhost:3000/products/"+product_id,
+                          async: false,
+                          dataType: 'json',
+                          success: function (json) {
+                            mydata = json.product.name;
+                          }
+                          });
+                          return mydata;
+                      }
+
+                      function getproductimage(product_id){
+                        var mydata = [];
+                          $.ajax({
+                          url: "http://localhost:3000/products/"+product_id,
+                          async: false,
+                          dataType: 'json',
+                          success: function (json) {
+                            mydata = json.product.productImage;
+                          }
+                          });
+                          return mydata;
+                      }
+
+
+                  orderdetails_data +='<tr>';
+                  orderdetails_data +='<td><img src="http://localhost:3000/'+getproductimage(v.product)+'" class="img-responsive" height="50" width="50"/> '+ getproductname(v.product)+'</td>';
+                  orderdetails_data +='<td>'+v.quantity+'</td>';
+                  orderdetails_data +='<td>'+v.amount+'</td>';
+                  orderdetails_data +='<td>'+v.quantity*v.amount+'</td>';
+                  orderdetails_data +='</tr>';
+
+                });
+
+                  $("#orderdetails_data tr").remove();
+                  $('#orderdetails_data').append(orderdetails_data);
+
+              });
+
+
+              $("#orderstatus_button").click(function(){
+                if($(orderstatus_option).val()==1){
+
+                  var market_userId = parseJwt_userId(token);
+                  $.getJSON("http://localhost:3000/shopUnits?user="+market_userId, function (data) {
+                    $.each(data.shopUnit, function (key, entry) {
+                      $.getJSON("http://localhost:3000/orderdetails/?guid="+orderId,function(data){
+                          $.each(data.orderDetails, function(k,v){
+                            var shopunitstock_quantity=v.quantity;
+                            $.getJSON("http://localhost:3000/shopUnitstocks?shopUnit="+entry._id+"&product="+v.product,function(data){
+                                $.each(data.shopUnitStocks, function(k,value){
+                                    var difference=value.stock-shopunitstock_quantity;
+                                    if(difference<0){
+                                      alert("Stokta Yeterli Ürün Yok");
+                                    } else {
+                                      var shopunitstockquantity = new XMLHttpRequest();
+                                      shopunitstockquantity.open('PATCH', "http://localhost:3000/shopUnitstocks/"+value._id, false);
+                                      shopunitstockquantity.setRequestHeader("Content-type","application/json");
+                                      shopunitstockquantity.send('[{"propName": "stock","value":"'+difference+'"}]');
+                                      //alert("Stoktan Düşürüldü"); // negatif sayıya düşüyor
+                                      //burada problemler var
+                                    }
+
+                                });
+                              });
+                            $.ajax({
+                             url: "http://localhost:3000/shopUnitStockMovements",
+                             type: "POST",
+                             data: {
+                                 product: v.product,
+                                 shopUnit: entry._id,
+                                 quantity: v.quantity,
+                                 movement_type: "0"
+                             },
+                             dataType: "JSON",
+                             success: function (jsonStr) {
+                                 $("#result").text(JSON.stringify(jsonStr));
+                             }
+                           });
+                          });
+                        });
+                    });
+                  });
+                }
+
+
+                var request = new XMLHttpRequest();
+                request.open('PATCH', 'http://localhost:3000/orders/'+orderId, false);
+                request.setRequestHeader("Content-type","application/json");
+                request.send('[{"propName": "order_status","value":"'+$(orderstatus_option).val()+'"}]');
+                //alert("Başarıyla Güncellendi");
+              });
+            });
+          });*/
+        });
+
+
+          $("#orderprint_button").click(function(){
+              pdfForElement('orderprint').download();
+              function pdfForElement(id) {
+                function ParseContainer(cnt, e, p, styles) {
+                  var elements = [];
+                  var children = e.childNodes;
+                  if (children.length != 0) {
+                    for (var i = 0; i < children.length; i++) p = ParseElement(elements, children[i], p, styles);
+                  }
+                  if (elements.length != 0) {
+                    for (var i = 0; i < elements.length; i++) cnt.push(elements[i]);
+                  }
+                  return p;
+                }
+
+                function ComputeStyle(o, styles) {
+                  for (var i = 0; i < styles.length; i++) {
+                    var st = styles[i].trim().toLowerCase().split(":");
+                    if (st.length == 2) {
+                      switch (st[0]) {
+                        case "font-size":
+                          {
+                            o.fontSize = parseInt(st[1]);
+                            break;
+                          }
+                        case "text-align":
+                          {
+                            switch (st[1]) {
+                              case "right":
+                                o.alignment = 'right';
+                                break;
+                              case "center":
+                                o.alignment = 'center';
+                                break;
+                            }
+                            break;
+                          }
+                        case "font-weight":
+                          {
+                            switch (st[1]) {
+                              case "bold":
+                                o.bold = true;
+                                break;
+                            }
+                            break;
+                          }
+                        case "text-decoration":
+                          {
+                            switch (st[1]) {
+                              case "underline":
+                                o.decoration = "underline";
+                                break;
+                            }
+                            break;
+                          }
+                        case "font-style":
+                          {
+                            switch (st[1]) {
+                              case "italic":
+                                o.italics = true;
+                                break;
+                            }
+                            break;
+                          }
+                      }
+                    }
+                  }
+                }
+
+                function ParseElement(cnt, e, p, styles) {
+                  if (!styles) styles = [];
+                  if (e.getAttribute) {
+                    var nodeStyle = e.getAttribute("style");
+                    if (nodeStyle) {
+                      var ns = nodeStyle.split(";");
+                      for (var k = 0; k < ns.length; k++) styles.push(ns[k]);
+                    }
+                  }
+
+                  switch (e.nodeName.toLowerCase()) {
+                    case "#text":
+                      {
+                        var t = {
+                          text: e.textContent.replace(/\n/g, "")
+                        };
+                        if (styles) ComputeStyle(t, styles);
+                        p.text.push(t);
+                        break;
+                      }
+                    case "b":
+                    case "strong":
+                      {
+                        //styles.push("font-weight:bold");
+                        ParseContainer(cnt, e, p, styles.concat(["font-weight:bold"]));
+                        break;
+                      }
+                    case "u":
+                      {
+                        //styles.push("text-decoration:underline");
+                        ParseContainer(cnt, e, p, styles.concat(["text-decoration:underline"]));
+                        break;
+                      }
+                    case "i":
+                      {
+                        //styles.push("font-style:italic");
+                        ParseContainer(cnt, e, p, styles.concat(["font-style:italic"]));
+                        //styles.pop();
+                        break;
+                        //cnt.push({ text: e.innerText, bold: false });
+                      }
+                    case "span":
+                      {
+                        ParseContainer(cnt, e, p, styles);
+                        break;
+                      }
+                    case "br":
+                      {
+                        p = CreateParagraph();
+                        cnt.push(p);
+                        break;
+                      }
+                    case "table":
+                      {
+                        var t = {
+                          table: {
+                            widths: [],
+                            body: []
+                          }
+                        }
+                        var border = e.getAttribute("border");
+                        var isBorder = false;
+                        if (border)
+                          if (parseInt(border) == 1) isBorder = true;
+                        if (!isBorder) t.layout = 'noBorders';
+                        ParseContainer(t.table.body, e, p, styles);
+
+                        var widths = e.getAttribute("widths");
+                        if (!widths) {
+                          if (t.table.body.length != 0) {
+                            if (t.table.body[0].length != 0)
+                              for (var k = 0; k < t.table.body[0].length; k++) t.table.widths.push("*");
+                          }
+                        } else {
+                          var w = widths.split(",");
+                          for (var k = 0; k < w.length; k++) t.table.widths.push(w[k]);
+                        }
+                        cnt.push(t);
+                        break;
+                      }
+                    case "tbody":
+                      {
+                        ParseContainer(cnt, e, p, styles);
+                        //p = CreateParagraph();
+                        break;
+                      }
+                    case "tr":
+                      {
+                        var row = [];
+                        ParseContainer(row, e, p, styles);
+                        cnt.push(row);
+                        break;
+                      }
+                    case "td":
+                      {
+                        p = CreateParagraph();
+                        var st = {
+                          stack: []
+                        }
+                        st.stack.push(p);
+
+                        var rspan = e.getAttribute("rowspan");
+                        if (rspan) st.rowSpan = parseInt(rspan);
+                        var cspan = e.getAttribute("colspan");
+                        if (cspan) st.colSpan = parseInt(cspan);
+
+                        ParseContainer(st.stack, e, p, styles);
+                        cnt.push(st);
+                        break;
+                      }
+                    case "div":
+                    case "p":
+                      {
+                        p = CreateParagraph();
+                        var st = {
+                          stack: []
+                        }
+                        st.stack.push(p);
+                        ComputeStyle(st, styles);
+                        ParseContainer(st.stack, e, p);
+
+                        cnt.push(st);
+                        break;
+                      }
+                    default:
+                      {
+                        console.log("Parsing for node " + e.nodeName + " not found");
+                        break;
+                      }
+                  }
+                  return p;
+                }
+
+                function ParseHtml(cnt, htmlText) {
+                  var html = $(htmlText.replace(/\t/g, "").replace(/\n/g, ""));
+                  var p = CreateParagraph();
+                  for (var i = 0; i < html.length; i++) ParseElement(cnt, html.get(i), p);
+                }
+
+                function CreateParagraph() {
+                  var p = {
+                    text: []
+                  };
+                  return p;
+                }
+                content = [  { text: 'Taahhüt Belgesi', alignment: 'center',fontSize: 18,bold: true,margin: [0, 0, 0, 30]},
+                { text: 'Market: '+$('#market_name_pdf').text(), alignment: 'left',bold: true},
+                { text: 'Ödeme Tipi: '+$('#payment_type_pdf').text(), alignment: 'left',bold: true},
+                { text: 'Müşteri: '+$('#customer_name_pdf').text(), alignment: 'left',bold: true},
+                { text: 'Adres: '+$('#customer_address_pdf').text(), alignment: 'left',bold: true},
+                { text: 'Telefon: '+$('#customer_phone_pdf').text(), alignment: 'left',bold: true}];
+                ParseHtml(content, document.getElementById(id).outerHTML);
+                return pdfMake.createPdf({
+                  content: content
+                });
+              }
+
+          });
+      }
+
+  });
+
+
+
+  </script>
+
+</html>

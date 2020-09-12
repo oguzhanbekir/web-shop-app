@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Admin Paneli</title>
+
+    <!-- Bootstrap core CSS-->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Page level plugin CSS-->
+    <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin.css" rel="stylesheet">
+
+  </head>
+
+  <body id="page-top">
+
+    <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+
+      <a class="navbar-brand mr-1" href="adminpanel.html">Admin Paneli</a>
+
+      <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Navbar Search -->
+      <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+        <div class="input-group">
+
+        </div>
+      </form>
+
+      <!-- Navbar -->
+      <ul class="navbar-nav ml-auto ml-md-0">
+        <li class="nav-item dropdown no-arrow">
+          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-user-circle fa-fw"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+            <a class="dropdown-item" href="adminpanel.html">Hesabım</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="../index.php" id="logout">Çıkış Yap</a>
+          </div>
+        </li>
+      </ul>
+
+    </nav>
+
+    <div id="wrapper">
+
+      <!-- Sidebar -->
+      <ul class="sidebar navbar-nav">
+        <li class="nav-item">
+              <a class="nav-link" href="adminpanel.html">
+                <i class="fas fa-user-circle"></i>
+                <span>Kişisel Bilgilerim</span></a>
+        </li>
+        <li class="nav-item">
+              <a class="nav-link" href="adminpanel_brand.html">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Marka Ekle</span></a>
+        </li>
+        <li class="nav-item">
+              <a class="nav-link" href="adminpanel_category.html">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Kategori Ekle</span></a>
+        </li>
+        <li class="nav-item active">
+              <a class="nav-link" href="adminpanel_product.html">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Ürün Ekle</span></a>
+        </li>
+        <li class="nav-item">
+              <a class="nav-link" href="adminpanel_marketsettings.html">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Market Ayarları</span></a>
+        </li>
+        <li class="nav-item">
+              <a class="nav-link" href="adminpanel_neighborhood.html">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Bölge Ayarları</span></a>
+        </li>
+        <li class="nav-item">
+              <a class="nav-link" href="adminpanel_user.html">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Kullanıcı Ayarları</span></a>
+        </li>
+      </ul>
+
+      <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+          <!-- Breadcrumbs-->
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="orders.html">Admin</a>
+            </li>
+            <li class="breadcrumb-item active">Tablolar</li>
+          </ol>
+
+          <!-- DataTables Example -->
+          <div class="card mb-3">
+            <div class="card-header">
+              <i class="fas fa-table"></i> Ürün Bilgileri
+            </div>
+            <div class="card-body">
+              <div id="accordion">
+                  <div class="card">
+                    <div class="card-header" id="headingOne">
+                      <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                          Ürün Ekle
+                        </button>
+                      </h5>
+                    </div>
+
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                      <div class="card-body">
+                        <form id="addproduct" method="post" enctype="multipart/form-data">
+                          <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Name</label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control" name="name" placeholder="Name">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Description</label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control" name="description" placeholder="Description">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="category1" class="col-sm-2 col-form-label" >Category</label>
+                            <div class="col-sm-10">
+                              <select class="form-control category"> </select>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="category1" class="col-sm-2 col-form-label">Sub-Category</label>
+                            <div class="col-sm-10">
+                              <select name="category" class="form-control sub-category"> </select>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="brand1" class="col-sm-2 col-form-label">Brand</label>
+                            <div class="col-sm-10">
+                              <select name="brand" class="form-control brand"></select>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Image</label>
+                            <div class="col-sm-10">
+                              <input type="file" name="productImage"/>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <div class="col-sm-10">
+                              <button type="submit" name="submit" class="btn btn-primary">Gönder</button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-header" id="headingTwo">
+                      <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                          Ürün Sil
+                        </button>
+                      </h5>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                      <div class="card-body">
+                        <form id="deleteproduct">
+                          <div class="form-group row">
+                            <label for="category1" class="col-sm-2 col-form-label">Category</label>
+                            <div class="col-sm-10">
+                              <select class="form-control category"> </select>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="category1" class="col-sm-2 col-form-label">Sub-Category</label>
+                            <div class="col-sm-10">
+                              <select name="category" class="form-control sub-category subcategory_show_product"> </select>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="product_delete" class="col-sm-2 col-form-label">Name</label>
+                            <div class="col-sm-10">
+                              <select name="category" class="form-control product_name"></select>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <div class="col-sm-10">
+                              <button type="submit" name="submit" class="btn btn-primary" id="product_submit_delete">Sil</button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-header" id="headingThree">
+                      <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                          Ürün Güncelle
+                        </button>
+                      </h5>
+                    </div>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                      <div class="card-body">
+                        <form method="post">
+                          <div class="form-group row">
+                            <label for="category1" class="col-sm-2 col-form-label">Category</label>
+                            <div class="col-sm-10">
+                              <select class="form-control category"> </select>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="category1" class="col-sm-2 col-form-label">Sub-Category</label>
+                            <div class="col-sm-10">
+                              <select name="category" class="form-control sub-category subcategory_show_product"> </select>
+                          </div>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Ürün</label>
+                            <div class="col-sm-10">
+                              <select name="brand" class="form-control product_name" id="update_product"></select>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Name</label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control" name="Name" placeholder="Name" id="update_product_name">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Description</label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control" name="description" placeholder="Description" id="update_product_description">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="category1" class="col-sm-2 col-form-label">Category</label>
+                            <div class="col-sm-10">
+                              <select name="category" class="form-control category" id="update_product_main_category"> </select>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="category1" class="col-sm-2 col-form-label">Sub-Category</label>
+                            <div class="col-sm-10">
+                              <select name="category" class="form-control sub-category" id="update_product_sub_category"> </select>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="brand1" class="col-sm-2 col-form-label">Brand</label>
+                            <div class="col-sm-10">
+                              <select name="brand" class="form-control brand" id="update_product_brand"></select>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <div class="col-sm-10">
+                              <button type="submit" name="submit" class="btn btn-primary" id="product_submit_update">Güncelle</button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-header" id="headingFour">
+                      <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                          Ürün Resim Güncelle
+                        </button>
+                      </h5>
+                    </div>
+                    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+                      <div class="card-body">
+                        <form id="product_picture_update">
+                            <div class="form-group row">
+                              <label for="category1" class="col-sm-2 col-form-label">Category</label>
+                              <div class="col-sm-10">
+                                <select class="form-control category"> </select>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label for="category1" class="col-sm-2 col-form-label">Sub-Category</label>
+                              <div class="col-sm-10">
+                                <select name="category" class="form-control sub-category subcategory_show_product"> </select>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-sm-2 col-form-label">Ürün</label>
+                              <div class="col-sm-10">
+                                <select name="brand" class="form-control product_name" id="product_picture_id"></select>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-sm-2 col-form-label">Image</label>
+                              <div class="col-sm-10">
+                                <input type="file" name="productImage" />
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <div class="col-sm-10">
+                                <button type="submit" name="submit" class="btn btn-primary" >Güncelle</button>
+                              </div>
+                            </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                   <div class="card-header" id="headingFive">
+                     <h5 class="mb-0">
+                       <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                         Tüm Ürünler
+                       </button>
+                     </h5>
+                   </div>
+                   <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+                     <div class="card-body">
+                       <table class="table table-bordered table-striped">
+                         <thead>
+                           <tr>
+                             <th>ID</th>
+                             <th>Status</th>
+                             <th>Name</th>
+                             <th>Description</th>
+                             <th>Image</th>
+                             <th>Category</th>
+                             <th>Brand</th>
+                           </tr>
+                         </thead>
+                         <tbody  id="product_data">
+
+                         </tbody>
+                       </table>
+                       <nav>
+                         <ul class="pagination">
+                         </ul>
+                       </nav>
+                     </div>
+                   </div>
+                 </div>
+                </div>
+            </div>
+          </div>
+
+          <p class="small text-center text-muted my-5">
+          </p>
+
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+        <footer class="sticky-footer">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Hesaplı Marketim © 2018</span>
+            </div>
+          </div>
+        </footer>
+
+      </div>
+      <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Page level plugin JavaScript-->
+    <script src="vendor/datatables/jquery.dataTables.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin.min.js"></script>
+
+    <!-- Demo scripts for this page-->
+    <script src="js/demo/datatables-demo.js"></script>
+    <script src="../js/main.js"></script>
+
+  </body>
+
+  <script>
+
+  $(document).ready(function(){
+
+    function parseJwt_userId (token) {
+          var base64Url = token.split('.')[1];
+          var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+          var deneme=JSON.parse(window.atob(base64));
+          return deneme.userId;
+    };
+    function parseJwt_userType (token) {
+          var base64Url = token.split('.')[1];
+          var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+          var deneme=JSON.parse(window.atob(base64));
+          return deneme.userType;
+      };
+
+    var token = $.parseJSON(localStorage.getItem('Token'));
+      if (token == null  || parseJwt_userType(token)!="5c1d176670920532900b6a5f") {
+          location.href="../404.php";
+          return;
+      }else{
+        $("#addproduct").on('submit', function (event)
+          {
+              event.preventDefault();
+              var form = $(this)[0];
+              var data = new FormData(form);
+              $.ajax({
+                  type: "POST",
+                  url: "http://localhost:3000/products",
+                  data: data,
+                  dataType: "json",
+              processData: false,
+              contentType: false,
+              success: function (jsonStr) {
+                alert("Ürün Başarıyla Eklendi");
+              },
+              error: function (xhr, status, error) {
+                  alert("Ürün Eklenemedi");
+              }
+              });
+          });
+
+          let dropdown_brand = $('.brand');
+          dropdown_brand.empty();
+          dropdown_brand.append('<option selected="true" disabled>Marka Seçiniz</option>');
+          dropdown_brand.prop('selectedIndex', 0);
+          $.ajax({
+             url: "http://localhost:3000/brands",
+             type: "Get",
+             dataType: "json",
+             headers: {
+                 "accept": "application/json",
+                 "content-type": "application/json",
+                 "authorization": "Bearer "+ token
+                 },
+             success: function (data) {
+               $.each(data.brands, function (key, entry) {
+                 dropdown_brand.append($('<option></option>').attr('value', entry._id).text(entry.name));
+
+               });         },
+             error: function (xhr, status, error) {
+                 alert("Token Alınamadı");
+             }
+         });
+
+         let dropdown_category = $('.category');
+         dropdown_category.empty();
+         dropdown_category.append('<option selected="true" disabled>Kategori Seçiniz</option>');
+         dropdown_category.prop('selectedIndex', 0);
+         // Populate dropdown_category with list of provinces
+         $.getJSON("http://localhost:3000/categories", function (data) {
+           $.each(data.categories, function (key, entry) {
+             if(entry.node_id=="0"){
+               dropdown_category.append($('<option></option>').attr('value', entry._id).text(entry.name));
+             }
+           });
+         });
+         $(".category").on('change', function() {
+           let dropdown_subcategory = $('.sub-category');
+           dropdown_subcategory.empty();
+           dropdown_subcategory.append('<option selected="true" disabled>Kategori Seçiniz</option>');
+           dropdown_subcategory.prop('selectedIndex', 0);
+
+
+             var category_id = $(this).val();
+             $.getJSON("http://localhost:3000/categories", function (data) {
+               $.each(data.categories, function (key, entry) {
+                 if(entry.node_id==category_id){
+                   dropdown_subcategory.append($('<option></option>').attr('value', entry._id).text(entry.name));
+                 }
+               });
+             });
+         });
+
+
+         $("select.product_name").change(function(){
+             var product_id_delete = $(this).children("option:selected").val();
+             $("#deleteproduct").on('submit', function (event){
+                           $.ajax({
+                           url: "http://localhost:3000/products/"+product_id_delete,
+                           type: 'DELETE',
+                           success: function(result) {
+                               alert("Başarıyla Silindi");
+                           },
+                           error: function (xhr, status, error) {
+                               alert("Ürün Silinemedi");
+                           }
+                       });
+               });
+            });
+
+        $(".subcategory_show_product").change(function(){
+          var subcategory_show_product = $(this).children("option:selected").val();
+          let dropdown_product_name = $('.product_name');
+          dropdown_product_name.empty();
+          dropdown_product_name.append('<option selected="true" disabled>Ürün Seçiniz</option>');
+          dropdown_product_name.prop('selectedIndex', 0);
+          // Populate dropdown with list of provinces
+          $.getJSON("http://localhost:3000/products?category="+subcategory_show_product, function (data) {
+            $.each(data.products, function (key, entry) {
+              dropdown_product_name.append($('<option></option>').attr('value', entry._id).text(entry.name));
+            });
+          });
+        });
+
+
+
+          $("#update_product").on('change', function() {
+              var product_id_update = $(this).val();
+                $('#update_product_name').val("");
+                $('#update_product_description').val("");
+              if(product_id_update){
+                $.getJSON("http://localhost:3000/products/"+product_id_update, function (data) {
+
+                  $.each(data, function (key, entry) {
+                    if(key=="product"){
+                      $('#update_product_name').val($('#update_product_name').val() + entry.name);
+                      $('#update_product_description').val($('#update_product_description').val() + entry.description);
+                      $.getJSON("http://localhost:3000/categories/"+entry.category, function (data) {
+                         $('#update_product_main_category').val(`${data.category.node_id}`);
+                      });
+                      $('#update_product_sub_category').val(entry.category);
+                      $('#update_product_brand').val(entry.brand);
+                    }
+                  });
+                });
+                $("#product_submit_update").click(function(){
+                var request = new XMLHttpRequest();
+                  request.open('PATCH', 'http://localhost:3000/products/'+product_id_update, false);
+                  request.setRequestHeader("Content-type","application/json");
+                  request.send('[{"propName": "name","value":"'+$('#update_product_name').val()+'"},{"propName": "description","value":"'+$("#update_product_description").val()+'"},{"propName": "category","value":"'+$("#update_product_sub_category").val()+'"},{"propName": "brand","value":"'+$("#update_product_brand").val()+'"}]');
+                });
+              }
+          });
+
+          $("#product_picture_id").change(function(){
+              var selectedProduct = $(this).children("option:selected").val();
+              $("#product_picture_update").on('submit', function (event){
+                    event.preventDefault();
+                    var form = $(this)[0];
+                    var data = new FormData(form);
+                    $.ajax({
+                        type: "PATCH",
+                        url: "http://localhost:3000/products/image/"+selectedProduct,
+                        data: data,
+                        dataType: "json",
+                    processData: false,
+                    contentType: false
+                    });
+                    alert("Ürün Başarıyla Güncellendi");
+                });
+            });
+            function products_table(page_number=1){
+
+              $.getJSON("http://localhost:3000/products?page="+page_number+"&limit=10",function(data){
+                  var products_data='', pagenumber_data='' ;
+
+                  var count = `${data.sumcount}`;
+                  var perpage=10;
+                  var total_pagenumber= Math.ceil(count/perpage);
+                  if(page_number>1){
+                        var before=parseInt(page_number)-1;
+                        pagenumber_data +='<li class="page-item"><a class="page-link" href="#'+before+'">Önceki</a></li>';
+                  }
+                  for(var i=1;i<=total_pagenumber;i++){
+                      if(i==page_number){
+                          pagenumber_data +='<li class="page-item active"><a class="page-link" href="#'+i+'">'+i+'</a></li>';
+                      }else{
+                          pagenumber_data +='<li class="page-item"><a class="page-link" href="#'+i+'">'+i+'</a></li>';
+                      }
+                  }
+                  if(page_number!=total_pagenumber){
+                        var next = parseInt(page_number) + 1;
+                        pagenumber_data +='<li class="page-item"><a class="page-link" href="#'+next+'">Sonraki</a></li>';
+                  }
+                    $('.pagination').html(pagenumber_data);
+
+                  $('.page-item a').click(function(){
+                    var num_href=$(this).attr('href');
+                    var num=num_href.split('#');
+                    products_table(num[1]);
+                  });
+
+                  $.each(data.products, function(k,v){
+
+                      $.getJSON("http://localhost:3000/categories/"+v.category, function(data) {
+                        var product_category_name = `${data.category.name}`
+                        $( "."+v.category ).removeClass().addClass( v.category );
+                            $("."+v.category).text(product_category_name);
+                        });
+                      $.getJSON("http://localhost:3000/brands/"+v.brand, function(data) {
+                          var product_brand_name = `${data.brand.name}`
+                          $( "."+v.brand ).removeClass().addClass( v.brand );
+                              $("."+v.brand).text(product_brand_name);
+                          });
+
+                    products_data +='<tr>';
+                    products_data += '<td>'+v._id+'</td>';
+                    products_data += '<td>'+v.status+'</td>';
+                    products_data += '<td>'+v.name+'</td>';
+                    products_data += '<td>'+v.description+'</td>';
+                    products_data += '<td><img src="http://localhost:3000/'+v.productImage+'" width="50" height="50"></td>';
+                    products_data += '<td class="'+v.category+'"></td>';
+                    products_data += '<td class="'+v.brand+'"></td>';
+                    products_data +='<tr>';
+
+                    });
+
+                    $('#product_data').html(products_data);
+
+                });
+            }
+
+            products_table();
+
+
+      }
+
+
+
+
+  });
+
+
+
+  </script>
+
+</html>

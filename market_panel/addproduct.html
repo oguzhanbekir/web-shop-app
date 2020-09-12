@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Market Paneli</title>
+
+    <!-- Bootstrap core CSS-->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Page level plugin CSS-->
+    <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin.css" rel="stylesheet">
+
+  </head>
+
+  <body id="page-top">
+
+    <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+
+      <a class="navbar-brand mr-1" href="myaccount.html" id="market_logo"></a>
+
+      <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Navbar Search -->
+      <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+        <div class="input-group">
+
+        </div>
+      </form>
+
+      <!-- Navbar -->
+      <ul class="navbar-nav ml-auto ml-md-0">
+        <li class="nav-item dropdown no-arrow">
+          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-user-circle fa-fw"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+            <a class="dropdown-item" href="myaccount.html">Hesabım</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="../index.php" id="logout">Çıkış Yap</a>
+          </div>
+        </li>
+      </ul>
+
+    </nav>
+
+    <div id="wrapper">
+
+      <!-- Sidebar -->
+      <ul class="sidebar navbar-nav">
+        <li class="nav-item">
+              <a class="nav-link" href="myaccount.html">
+                <i class="fas fa-user-circle"></i>
+                <span>Kişisel Bilgilerim</span></a>
+        </li>
+        <li class="nav-item active">
+              <a class="nav-link" href="addproduct.html">
+                <i class="fas fa-store"></i>
+                <span>Stok Bilgisi</span></a>
+        </li>
+        <li class="nav-item">
+              <a class="nav-link" href="orders.html">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Siparişler</span></a>
+        </li>
+        <li class="nav-item">
+              <a class="nav-link" href="serviceAddress.html">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Servis Adresleri</span></a>
+        </li>
+      </ul>
+
+      <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+          <!-- Breadcrumbs-->
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="addproduct.html">Stok Bilgisi</a>
+            </li>
+            <li class="breadcrumb-item active">Tablolar</li>
+          </ol>
+
+          <!-- DataTables Example -->
+          <div class="card mb-3">
+            <div class="card-header">
+              <i class="fas fa-table"></i> Stok Bilgisi
+            </div>
+            <div class="card-body">
+              <div id="accordion">
+                <div class="card">
+                  <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                      <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Ürün Stok Bilgisi Ekle
+                      </button>
+                    </h5>
+                  </div>
+                  <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="card-body">
+                      <div class="form-group row">
+                        <label for="category1" class="col-sm-2 col-form-label">Kategori</label>
+                        <div class="col-sm-10">
+                          <select class="form-control category"> </select>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="category1" class="col-sm-2 col-form-label">Alt-Kategori</label>
+                        <div class="col-sm-10">
+                          <select name="category" class="form-control sub-category"> </select>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="brand1" class="col-sm-2 col-form-label">Ürün</label>
+                        <div class="col-sm-10">
+                          <select name="brand" class="form-control product_name" id="shopunitstock_product"></select>
+                        </div>
+                      </div>
+                    <div class="form-group row">
+                      <label class="col-sm-2 col-form-label">Stok Adedi</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" name="stok" placeholder="Stok Adedi" id="shopunit_stock">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-2 col-form-label">Fiyat</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" name="price" placeholder="Fiyat" id="shopunit_price">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-sm-10">
+                        <button type="submit" name="submit" class="btn btn-primary" id="shop_unitstock_submit">Gönder</button>
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-header" id="headingTwo">
+                    <h5 class="mb-0">
+                      <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Ürün Stok Bilgisi Güncelle
+                      </button>
+                    </h5>
+                  </div>
+                  <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                    <div class="card-body">
+                      <div class="form-group row">
+                        <label for="category1" class="col-sm-2 col-form-label">Kategori</label>
+                        <div class="col-sm-10">
+                          <select class="form-control category2"> </select>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="category1" class="col-sm-2 col-form-label" >Alt-Kategori</label>
+                        <div class="col-sm-10">
+                          <select name="category" class="form-control sub-category2"> </select>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="brand1" class="col-sm-2 col-form-label">Ürün</label>
+                        <div class="col-sm-10">
+                          <select name="brand" class="form-control product_name_shopunit" id="shopunitstock_product_update"></select>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                      <label class="col-sm-2 col-form-label">Stok Adedi</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" name="stock" placeholder="Stok Adedi" id="shopunit_stock_update">
+                      </div>
+                      </div>
+                      <div class="form-group row">
+                      <label class="col-sm-2 col-form-label">Fiyat</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" name="price" placeholder="Fiyat" id="shopunit_price_update">
+                      </div>
+                      </div>
+                      <div class="form-group row">
+                      <div class="col-sm-10">
+                        <button type="submit" name="submit" class="btn btn-primary" id="shop_unitstock_update_submit">Gönder</button>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-header" id="headingThree">
+                    <h5 class="mb-0">
+                      <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Tüm Ürünler
+                      </button>
+                    </h5>
+                  </div>
+                  <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                    <div class="card-body">
+                      <table class="table table-bordered table-striped" id="shopUnitStocks_info">
+                        <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>Shop Unit</th>
+                          <th>Product</th>
+                          <th>Stock</th>
+                          <th>Price</th>
+                        </tr>
+                      </thead>
+                        <tbody>
+                        </tbody>
+                      </table>
+                      <nav>
+                        <ul class="pagination">
+
+                        </ul>
+                      </nav>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+
+          <p class="small text-center text-muted my-5">
+
+          </p>
+
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+        <footer class="sticky-footer">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Hesaplı Marketim © 2019</span>
+            </div>
+          </div>
+        </footer>
+
+      </div>
+      <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Page level plugin JavaScript-->
+    <script src="vendor/datatables/jquery.dataTables.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin.min.js"></script>
+
+    <!-- Demo scripts for this page-->
+    <script src="js/demo/datatables-demo.js"></script>
+    <script src="../js/main.js"></script>
+
+  </body>
+
+  <script>
+  $(document).ready(function(){
+
+    function parseJwt_userId (token) {
+          var base64Url = token.split('.')[1];
+          var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+          var deneme=JSON.parse(window.atob(base64));
+          return deneme.userId;
+    };
+    var token = $.parseJSON(localStorage.getItem('Token'));
+      if (token == null) {
+          alert("Token Alınamadı");
+          return;
+      }else{
+        var categoryUpdateProduct=[];
+
+        var market_userId = parseJwt_userId(token);
+
+        $.getJSON("http://localhost:3000/shops?user="+market_userId, function (data) {
+            var marketinfo_data='';
+          $.each(data.shop, function (key, entry) {
+            marketinfo_data +='<img src="http://localhost:3000/'+entry.logo+'" width="50" height="50"> Market Paneli';
+          });
+          $('#market_logo').append(marketinfo_data);
+        });
+            $.getJSON("http://localhost:3000/shopUnits?user="+market_userId, function (data) {
+
+
+            /*    $.getJSON("http://localhost:3000/shopUnitStocks/?shopUnit="+data.shopUnit[0]._id,function(data){
+                  var shopUnitStock_data='';
+
+                    $.each(data.shopUnitStocks, function(k,v){
+
+                      $.getJSON("http://localhost:3000/shopUnits/"+v.shopUnit, function(data) {
+                        var shopUnit_name = `${data.shopUnit.name}`
+                        $( "."+v.shopUnit ).removeClass().addClass( v.shopUnit );
+                            $("."+v.shopUnit).text(shopUnit_name);
+                        });
+                      $.getJSON("http://localhost:3000/products/"+v.product, function(data) {
+                          var shopUnitStock_product = `${data.product.name}`
+                          $( "."+v.product ).removeClass().addClass( v.product );
+                              $("."+v.product).text(shopUnitStock_product);
+                          });
+
+                      shopUnitStock_data +='<tr>';
+                      shopUnitStock_data += '<td>'+v._id+'</td>';
+                      shopUnitStock_data += '<td class="'+v.shopUnit+'"></td>';
+                      shopUnitStock_data += '<td class="'+v.product+'"></td>';
+                      shopUnitStock_data += '<td>'+v.stock+'</td>';
+                      shopUnitStock_data += '<td>'+v.price+'</td>';
+                      shopUnitStock_data +='<tr>';
+                      });
+
+                $('#shopUnitStocks_info').append(shopUnitStock_data);
+              });*/
+
+
+
+                function products_table(page_number=1){
+                    $.getJSON("http://localhost:3000/shopUnitStocks/?shopUnit="+data.shopUnit[0]._id+"&page="+page_number+"&limit=10",function(data){
+                //  $.getJSON("http://localhost:3000/orders?sort=-1&user="+userId+"&page="+page_number+"&limit=10",function(data){
+                       var shopUnitStock_data='', pagenumber_data='' ;
+
+                       var count = `${data.sumcount}`;
+                       var perpage=10;
+                       var total_pagenumber= Math.ceil(count/perpage);
+                       if(page_number>1){
+                             var before=parseInt(page_number)-1;
+                             pagenumber_data +='<li class="page-item"><a class="page-link" href="#'+before+'">Önceki</a></li>';
+                       }
+                       for(var i=1;i<=total_pagenumber;i++){
+                           if(i==page_number){
+                               pagenumber_data +='<li class="page-item active"><a class="page-link" href="#'+i+'">'+i+'</a></li>';
+                           }else{
+                               pagenumber_data +='<li class="page-item"><a class="page-link" href="#'+i+'">'+i+'</a></li>';
+                           }
+                       }
+                       if(page_number!=total_pagenumber){
+                             var next = parseInt(page_number) + 1;
+                             pagenumber_data +='<li class="page-item"><a class="page-link" href="#'+next+'">Sonraki</a></li>';
+                       }
+                         $('.pagination').html(pagenumber_data);
+
+                       $('.page-item a').click(function(){
+                         var num_href=$(this).attr('href');
+                         var num=num_href.split('#');
+                         products_table(num[1]);
+                       });
+
+                       $.each(data.shopUnitStocks, function(k,v){
+
+                         $.getJSON("http://localhost:3000/shopUnits/"+v.shopUnit, function(data) {
+                           var shopUnit_name = `${data.shopUnit.name}`
+                           $( "."+v.shopUnit ).removeClass().addClass( v.shopUnit );
+                               $("."+v.shopUnit).text(shopUnit_name);
+                           });
+                         $.getJSON("http://localhost:3000/products/"+v.product, function(data) {
+                             var shopUnitStock_product = `${data.product.name}`
+                             $( "."+v.product ).removeClass().addClass( v.product );
+                                 $("."+v.product).text(shopUnitStock_product);
+                             });
+
+                         shopUnitStock_data +='<tr>';
+                         shopUnitStock_data += '<td>'+v._id+'</td>';
+                         shopUnitStock_data += '<td class="'+v.shopUnit+'"></td>';
+                         shopUnitStock_data += '<td class="'+v.product+'"></td>';
+                         shopUnitStock_data += '<td>'+v.stock+'</td>';
+                         shopUnitStock_data += '<td>'+v.price+'</td>';
+                         shopUnitStock_data +='<tr>';
+                         });
+
+                   $('#shopUnitStocks_info').html(shopUnitStock_data);
+
+                     });
+                 }
+                 products_table();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                $("#shop_unitstock_submit").click(function(){
+                  var shopunitstock_id=$("#shopunitstock_product").val();
+            //      alert(shopunitstock_id);
+
+
+                  $.getJSON("http://localhost:3000/shopUnitStocks?shopUnit="+data.shopUnit[0]._id+"&product="+shopunitstock_id,function(d){
+                          if(d.count==0){
+                            $.ajax({
+                             url: "http://localhost:3000/shopUnitStocks",
+                             type: "POST",
+                             data: {
+                                 product: $("#shopunitstock_product").val(),
+                                 shopUnit: data.shopUnit[0]._id,
+                                 stock: $("#shopunit_stock").val(),
+                                 price: $("#shopunit_price").val()
+                             },
+                             dataType: "JSON",
+                             success: function (jsonStr) {
+                                alert("Ürün stoklara eklenmiştir");
+                              //   $("#result").text(JSON.stringify(jsonStr));
+                                $.ajax({
+                                 url: "http://localhost:3000/shopUnitStockMovements",
+                                 type: "POST",
+                                 data: {
+                                     product: $("#shopunitstock_product").val(),
+                                     shopUnit: data.shopUnit[0]._id,
+                                     quantity: $("#shopunit_stock").val(),
+                                     movement_type:  "1"
+                                 },
+                                 dataType: "JSON",
+                                 success: function (jsonStr) {
+                                   alert("Ürün stoklara eklenmiştir");
+                                 }
+                               });
+                             }
+                           });
+
+
+                         } else {
+                           alert("Ürün stoklarda kayıtlıdır, lütfen güncelleyiniz");
+                         }
+                  });
+                });
+
+        });
+
+      $("#shopunitstock_product_update").on('change', function() {
+          var stock_id_update = $(this).val();
+            $('#shopunit_stock_update').val("");
+            $('#shopunit_price_update').val("");
+            $.getJSON("http://localhost:3000/shopUnitStocks/"+stock_id_update, function (data) {
+
+                  $('#shopunit_stock_update').val($("#shopunit_stock_update").val()+data.shopUnitStock.stock);
+                  $('#shopunit_price_update').val($("#shopunit_price_update").val()+data.shopUnitStock.price);
+
+                  $("#shop_unitstock_update_submit").click(function(){
+                    var request = new XMLHttpRequest();
+                    request.open('PATCH', 'http://localhost:3000/shopUnitStocks/'+stock_id_update, false);
+                    request.setRequestHeader("Content-type","application/json");
+                    request.send('[{"propName": "stock","value":"'+$('#shopunit_stock_update').val()+'"},{"propName": "price","value":"'+$('#shopunit_price_update').val()+'"}]');
+                    $.ajax({
+                     url: "http://localhost:3000/shopUnitStockMovements",
+                     type: "POST",
+                     data: {
+                         product: $("#shopunitstock_product_update").val(),
+                         shopUnit: data.shopUnitStock.shopUnit,
+                         quantity: $("#shopunit_stock_update").val(),
+                         movement_type:  "1"
+                     },
+                     dataType: "JSON",
+                     success: function (jsonStr) {
+                         $("#result").text(JSON.stringify(jsonStr));
+                     }
+                   });
+
+                    alert("Başarıyla Güncellendi");
+                  });
+            });
+          });
+
+          let dropdown_category = $('.category');
+          dropdown_category.empty();
+          dropdown_category.append('<option selected="true" disabled>Kategori Seçiniz</option>');
+          dropdown_category.prop('selectedIndex', 0);
+          let dropdown_category2 = $('.category2');
+          dropdown_category2.empty();
+          dropdown_category2.append('<option selected="true" disabled>Kategori Seçiniz</option>');
+          dropdown_category2.prop('selectedIndex', 0);
+          // Populate dropdown_category with list of provinces
+
+          $.getJSON("http://localhost:3000/categories", function (data) {
+            $.each(data.categories, function (key, entry) {
+              if(entry.node_id=="0"){
+                dropdown_category.append($('<option></option>').attr('value', entry._id).text(entry.name));
+                dropdown_category2.append($('<option></option>').attr('value', entry._id).text(entry.name));
+              }
+            });
+          });
+          $(".category").on('change', function() {
+            let dropdown_subcategory = $('.sub-category');
+            dropdown_subcategory.empty();
+            dropdown_subcategory.append('<option selected="true" disabled>Kategori Seçiniz</option>');
+            dropdown_subcategory.prop('selectedIndex', 0);
+
+
+              var category_id = $(this).val();
+              $.getJSON("http://localhost:3000/categories", function (data) {
+                $.each(data.categories, function (key, entry) {
+                  if(entry.node_id==category_id){
+                    dropdown_subcategory.append($('<option></option>').attr('value', entry._id).text(entry.name));
+                  }
+                });
+              });
+          });
+          $(".sub-category").on('change', function() {
+            var sub_category_product = $(this).val();
+              let dropdown_product_name = $('.product_name');
+              dropdown_product_name.empty();
+              dropdown_product_name.append('<option selected="true" disabled>Ürün Seçiniz</option>');
+              dropdown_product_name.prop('selectedIndex', 0);
+              // Populate dropdown with list of provinces
+              $.getJSON("http://localhost:3000/products?category="+sub_category_product, function (data) {
+                $.each(data.products, function (key, entry) {
+                  dropdown_product_name.append($('<option></option>').attr('value', entry._id).text(entry.name+" "+entry.description));
+                });
+              });
+          });
+
+          $(".category2").on('change', function() {
+            let dropdown_subcategory = $('.sub-category2');
+            dropdown_subcategory.empty();
+            dropdown_subcategory.append('<option selected="true" disabled>Kategori Seçiniz</option>');
+            dropdown_subcategory.prop('selectedIndex', 0);
+              var category_id = $(this).val();
+              $.getJSON("http://localhost:3000/categories", function (data) {
+                $.each(data.categories, function (key, entry) {
+                  if(entry.node_id==category_id){
+                    dropdown_subcategory.append($('<option></option>').attr('value', entry._id).text(entry.name));
+                  }
+                });
+              });
+          });
+
+          $(".sub-category2").on('change', function() {
+            categoryUpdateProduct=[];
+            var sub_category_product = $(this).val();
+        //    alert(sub_category_product);
+              let dropdown_product_name2 = $('.product_name_shopunit');
+              dropdown_product_name2.empty();
+              dropdown_product_name2.append('<option selected="true" disabled>Ürün Seçiniz</option>');
+              dropdown_product_name2.prop('selectedIndex', 0);
+
+              $.getJSON("http://localhost:3000/shopUnits?user="+market_userId, function (data) {
+                $.getJSON("http://localhost:3000/shopUnitStocks?shopUnit="+data.shopUnit[0]._id, function (data) {
+                  $.each(data.shopUnitStocks, function (key, entry) {
+                    $.ajax({
+                    url: "http://localhost:3000/products/"+entry.product,
+                    dataType: 'json',
+                    async: false,
+                    type:'GET',
+                    success: function(data2) {
+                      var datacategoryUpdateProduct = {
+                                stock_id:entry._id,
+                                productId: data2.product._id,
+                                name: data2.product.name,
+                                category:data2.product.category
+                        };
+                      categoryUpdateProduct.push(datacategoryUpdateProduct);
+                    }
+                  });
+                });
+                    var resultObject = search(sub_category_product, categoryUpdateProduct);
+                    for (var i=0; i < resultObject.length; i++) {
+                        dropdown_product_name2.append($('<option></option>').attr('value', resultObject[i].stock_id ).text(resultObject[i].name));
+                    }
+                });
+              });
+          });
+
+      }
+
+      function search(nameKey, myArray){
+        var deneme=[];
+          for (var i=0; i < myArray.length; i++) {
+              if (myArray[i].category === nameKey) {
+                  deneme.push(myArray[i]);
+              }
+          }
+              return deneme;
+      }
+
+
+
+
+
+  });
+
+
+
+  </script>
+
+</html>
